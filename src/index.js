@@ -12,14 +12,14 @@ const MongoStore = require('connect-mongo');
 require('dotenv').config();
 
 
-const server = http.createServer();
-const io = socketio(server, {
+// const server = http.createServer();
+const io = socketio(app, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"]
   }
 });
-server.listen(process.env.PORT || 4441);
+
 
 
 // Init our socket
@@ -27,15 +27,16 @@ server.listen(process.env.PORT || 4441);
 db.connection();
 // app.use(express.json());
 // app.use(cors());
-app.use(session({
-  secret: 'work hard',
-  resave: true,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.DATABASE_LOCAL
-  })
-}));
+// app.use(session({
+//   secret: 'work hard',
+//   resave: true,
+//   saveUninitialized: false,
+//   store: MongoStore.create({
+//     mongoUrl: process.env.DATABASE_LOCAL
+//   })
+// }));
 
 
 // middleware
 require('./app/socket')(io);
+app.listen(process.env.PORT || 4444, ()=>{console.log("Connected socket")})
