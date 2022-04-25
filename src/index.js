@@ -38,5 +38,5 @@ db.connection();
 
 
 // middleware
-require('./app/socket')(io);
+// require('./app/socket')(io);
 app.listen(process.env.PORT || 4444, ()=>{console.log("Connected socket")})
