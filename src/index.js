@@ -12,8 +12,8 @@ const MongoStore = require('connect-mongo');
 require('dotenv').config();
 
 
-// const server = http.createServer();
-const io = socketio(app, {
+const server = http.createServer();
+const io = socketio(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"]
@@ -39,4 +39,4 @@ db.connection();
 
 // middleware
 // require('./app/socket')(io);
-app.listen(process.env.PORT || 4444, ()=>{console.log("Connected socket")})
+server.listen(process.env.PORT || 4444, ()=>{console.log("Connected socket")})
